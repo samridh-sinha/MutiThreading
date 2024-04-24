@@ -1,0 +1,77 @@
+Thread Pool:
+1) It is a collection of threads, which are available to perform the submitted tasks.
+2) Once a task is completed, worker thread will get bck to thread pool and wait for a new task to be assigned.
+3) Means thread can be reused.
+
+Advantages of thread Pools
+1) Thread creation time can be saved.
+ - When each thread is created, space is allocated to it which takes time.
+ - With thread pools this time can be saved.
+
+2) Overhead of managing the thread lifecycle can be removed
+ - Since threads have different states like running, waiting etc. managing thread state can be complex
+
+3) Increase the performance
+ - More threads means, more context switching time, using control over thread creation, excess context switching can be avoided.
+
+
+ThreadPoolExecutor  - Helps to create a customizable ThreadPool. When no thread is available then the task is pushed to the queue
+If the queue is filled and the max no of threads has not been used then the new threads will be created till the max no of threads is
+reached as the definition. If the max number of threads has been created and the threads are busy then the bew tasks acot be picked up
+
+
+CorePoolSize - Number of threads initially created and are kept in the pool, even if they are idle
+
+allowCoreThreadTimeOut - Of This property is set to true (default=false) idle thread keep alive time specified by keepAliveTime
+
+keepAliveTime - Threads which are idle after this are terminated.
+
+maxPoolSize - Max. number of threads allowed in an pool.
+If no. Of  threads == corePoolSize and queue is also full then new threads are created.
+
+Blocking queue :
+Its the queue used to hold a task, before they get picked by a worker thread
+1) Bounded Queue - Queue with a fixes cap.
+    e.g ArrayBlockingQueue
+2) Unbounded Queue -  Queue with no fixes cap.
+    e.g LinkedBlockingQueue
+
+Rejected Execution handler:
+handler for the task that cannot be accepted by the thread pool. Different handlers already present in java
+i) new ThreadPoolExecutor.AbortPolicy
+    Throws Rejected Execution Exception
+
+ii) CallerRunsPolicy:
+    Executed the rejected task in the caller thread
+
+iii) Discard Policy
+     Silently discard the rejected task, without throwing an exception.
+
+iv) DiscardOldestPolicy
+    Discard the oldest task in the queue, to accommodate a new task
+
+Lifecycle of ThreadPolExecutor
+1) Running : Executor is in running state and submit() method will be used to add a new task
+2) ShutDown: No new tasks will be accepted but will let the threads already running to complete their tasks.
+3) Stop: Forced shutdown shutdownNow(). Forcefully makes the thread pool not accept new tasks and will not allow the running
+threads to continue.
+4) End of life for a particular thread Pool executor
+isTerminated() method can be used to check if a particular thread pool executor is terminates or not.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
